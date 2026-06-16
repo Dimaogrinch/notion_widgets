@@ -3,79 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Widget</title>
+<title>Trading Widget Pro</title>
 
 <style>
 body {
     margin: 0;
-    background: #0b0b0b;
-    font-variant-caps: all-petite-caps;
+    background: #0a0a0a;
     font-family: Arial, sans-serif;
 }
 
-/* центрирование */
+/* центр */
 .container {
-    width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 40px;
+    padding-top: 50px;
 }
 
-/* ГЛАВНЫЙ БЛОК (как на скрине) */
+/* GLASS CARD */
 .widget {
     width: 92%;
     max-width: 900px;
 
-    background: #0f0f0f;              /* чуть светлее фона */
-    border: 1px solid #3a3a3a;        /* тонкая серая рамка */
-    border-radius: 10px;
+    padding: 28px 20px;
+    border-radius: 14px;
 
-    padding: 22px 18px;
+    background: rgba(20, 20, 20, 0.65);
+    border: 1px solid rgba(255,255,255,0.10);
+
+    backdrop-filter: blur(10px);
 
     display: flex;
     flex-direction: column;
     align-items: center;
 
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
-/* ГЛАВНЫЙ ТЕКСТ */
+/* TITLE */
 .greet {
-    font-size: 28px;
-    letter-spacing: 2px;
-    color: #cfd3d7;   /* НЕ белый — мягкий серый */
+    font-size: 26px;
+    letter-spacing: 3px;
+    color: #d6d6d6;
     margin-bottom: 8px;
 }
 
-/* дата */
+/* DATE */
 .date {
-    font-size: 14px;
-    letter-spacing: 1px;
+    font-size: 13px;
     color: #9aa0a6;
-    margin-bottom: 6px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
 }
 
-/* часы */
+/* CLOCK */
 .clock {
     font-family: monospace;
     font-size: 18px;
-    color: #b9bec4;
+    color: #c4c7cc;
 }
 
-/* цифры */
 .time {
-    display: inline-block;
     min-width: 22px;
+    display: inline-block;
 }
 
-/* разделитель */
 .colon {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
-/* лёгкий hover эффект (как в UI системах) */
-.widget:hover {
-    border-color: #555;
+/* subtle highlight line like UI dashboards */
+.widget::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    position: relative;
+    top: -10px;
 }
 </style>
 </head>
@@ -86,7 +89,6 @@ body {
     <div class="widget">
 
         <div class="greet" id="greet"></div>
-
         <div class="date" id="date"></div>
 
         <div class="clock">
@@ -101,49 +103,39 @@ body {
 </div>
 
 <script>
-function displayGreetings(today){
-    let hrs = today.getHours();
+function updateTime(){
+    let now = new Date();
     let name = "DIMAOGRINCH";
 
-    if (hrs < 12)
-        document.getElementById("greet").innerHTML = "GOOD MORNING " + name;
-    else if (hrs < 18)
-        document.getElementById("greet").innerHTML = "GOOD AFTERNOON " + name;
-    else
-        document.getElementById("greet").innerHTML = "GOOD EVENING " + name;
-}
+    let h = now.getHours();
 
-function displayDate(today){
+    if (h < 12) {
+        document.getElementById("greet").innerHTML = "GOOD MORNING " + name;
+    } else if (h < 18) {
+        document.getElementById("greet").innerHTML = "GOOD AFTERNOON " + name;
+    } else {
+        document.getElementById("greet").innerHTML = "GOOD EVENING " + name;
+    }
+
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ["January","February","March","April","May","June",
         "July","August","September","October","November","December"];
 
     document.getElementById("date").innerHTML =
-        days[today.getDay()] + ", " +
-        months[today.getMonth()] + " " +
-        today.getDate() + " " +
-        today.getFullYear();
+        days[now.getDay()] + ", " +
+        months[now.getMonth()] + " " +
+        now.getDate() + " " +
+        now.getFullYear();
+
+    const pad = n => n < 10 ? "0"+n : n;
+
+    document.getElementById("hour").innerHTML = pad(now.getHours());
+    document.getElementById("min").innerHTML = pad(now.getMinutes());
+    document.getElementById("sec").innerHTML = pad(now.getSeconds());
 }
 
-function pad(n){
-    return n < 10 ? "0" + n : n;
-}
-
-function displayClock(today){
-    document.getElementById("hour").innerHTML = pad(today.getHours());
-    document.getElementById("min").innerHTML = pad(today.getMinutes());
-    document.getElementById("sec").innerHTML = pad(today.getSeconds());
-}
-
-function update(){
-    let now = new Date();
-    displayGreetings(now);
-    displayDate(now);
-    displayClock(now);
-}
-
-setInterval(update, 500);
-update();
+setInterval(updateTime, 500);
+updateTime();
 </script>
 
 </body>
