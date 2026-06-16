@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Widget Pro</title>
+<title>Trading Widget Soft</title>
 
 <style>
 body {
@@ -12,14 +12,14 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* центр */
+/* container */
 .container {
     display: flex;
     justify-content: center;
     padding-top: 50px;
 }
 
-/* GLASS CARD */
+/* main card */
 .widget {
     width: 92%;
     max-width: 900px;
@@ -35,48 +35,57 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 
-/* TITLE */
+/* 🔥 МЯГКИЙ ТЕКСТ (ключевое изменение) */
 .greet {
     font-size: 26px;
-    letter-spacing: 3px;
-    color: #d6d6d6;
+    font-weight: 300;          /* было жирнее → теперь мягко */
+    letter-spacing: 2px;
+    color: rgba(220, 220, 220, 0.85);
     margin-bottom: 8px;
 }
 
-/* DATE */
+/* дата */
 .date {
     font-size: 13px;
-    color: #9aa0a6;
+    font-weight: 300;          /* мягкий вес */
     letter-spacing: 1px;
+    color: rgba(170, 170, 170, 0.75);
     margin-bottom: 10px;
 }
 
-/* CLOCK */
+/* часы */
 .clock {
     font-family: monospace;
     font-size: 18px;
-    color: #c4c7cc;
+    font-weight: 300;          /* важно — убирает “тяжесть” */
+    color: rgba(200, 200, 200, 0.85);
 }
 
+/* цифры */
 .time {
     min-width: 22px;
     display: inline-block;
+    font-weight: 300;
 }
 
+/* разделитель */
 .colon {
-    opacity: 0.5;
+    opacity: 0.4;
 }
 
-/* subtle highlight line like UI dashboards */
+/* тонкая линия */
 .widget::before {
     content: "";
     width: 100%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.12),
+        transparent
+    );
     position: relative;
     top: -10px;
 }
@@ -109,13 +118,12 @@ function updateTime(){
 
     let h = now.getHours();
 
-    if (h < 12) {
+    if (h < 12)
         document.getElementById("greet").innerHTML = "GOOD MORNING " + name;
-    } else if (h < 18) {
+    else if (h < 18)
         document.getElementById("greet").innerHTML = "GOOD AFTERNOON " + name;
-    } else {
+    else
         document.getElementById("greet").innerHTML = "GOOD EVENING " + name;
-    }
 
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     const months = ["January","February","March","April","May","June",
