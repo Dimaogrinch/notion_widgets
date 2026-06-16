@@ -3,59 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Greetings</title>
+<title>Trading Widget</title>
 
 <style>
 
+/* BACKGROUND (Notion dark style) */
 body{
+    margin: 0;
+    background: #191919;
     font-variant-caps: all-petite-caps;
-    background: #191919;   /* Notion dark */
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 /* MAIN BOX */
 .widget {
-    padding: 8px 10px;
-    color: #d1d1d1;
+    width: 95%;
+    max-width: 900px;
 
-    display: flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction: column;
+    padding: 10px 14px;
 
-    max-width: 95%;
-    margin: auto;
-
-    background: #202020;   /* Notion card */
-    border: 1px solid #2f2f2f; /* мягкая рамка */
+    background: #202020;
+    border: 1px solid #2f2f2f;
     border-radius: 8px;
 
-    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* TEXT STYLE (Notion-like) */
+/* GREETING */
 .greet{
-    font-size: 2.2em;
+    font-size: 28px;
     font-weight: 400;
     color: #e6e6e6;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
 }
 
+/* DATE */
 .date {
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 14px;
     color: #a8a8a8;
+    margin-bottom: 4px;
 }
 
+/* CLOCK */
 .clock {
     font-family: monospace;
-    font-size: 1.2em;
+    font-size: 14px;
     color: #bdbdbd;
 }
 
+/* NUMBERS */
 .time {
     display: inline-block;
-    min-width: 20px;
+    min-width: 18px;
 }
 
+/* COLON */
 .colon {
     opacity: 0.5;
 }
@@ -65,22 +75,20 @@ body{
 
 <body>
 
-<div class="container">
-    <div class="widget">
+<div class="widget">
 
-        <div class="greet" id="greet"></div>
+    <div class="greet" id="greet"></div>
 
-        <div class="date" id="date"></div>
+    <div class="date" id="date"></div>
 
-        <div class="clock">
-            <div class="time" id="hour"></div>
-            <div class="colon">:</div>
-            <div class="time" id="min"></div>
-            <div class="colon">:</div>
-            <div class="time" id="sec"></div>
-        </div>
-
+    <div class="clock">
+        <span class="time" id="hour"></span>
+        <span class="colon">:</span>
+        <span class="time" id="min"></span>
+        <span class="colon">:</span>
+        <span class="time" id="sec"></span>
     </div>
+
 </div>
 
 <script>
@@ -92,11 +100,11 @@ function dispalyGreetings(today){
     let greet;
 
     if (hrs < 12)
-        greet = 'Good Morning ' + name;
+        greet = "Good Morning " + name;
     else if (hrs < 18)
-        greet = 'Good Afternoon ' + name;
+        greet = "Good Afternoon " + name;
     else
-        greet = 'Good Evening ' + name;
+        greet = "Good Evening " + name;
 
     document.getElementById('greet').innerHTML = greet;
 }
@@ -116,7 +124,7 @@ function dispalyDate(today){
 
 function dispalyClock(today){
 
-    function pad(n){ return n < 10 ? "0"+n : n; }
+    const pad = n => n < 10 ? "0"+n : n;
 
     document.getElementById('hour').innerHTML = pad(today.getHours());
     document.getElementById('min').innerHTML = pad(today.getMinutes());
