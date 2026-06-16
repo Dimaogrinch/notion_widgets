@@ -1,169 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Greetings</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greetings</title>
 
-    <style>
+<style>
 
+body{
+    font-variant-caps: all-petite-caps;
+    background: #191919;   /* Notion dark */
+}
 
-        body{
-            font-variant-caps: all-petite-caps;
+/* MAIN BOX */
+.widget {
+    padding: 8px 10px;
+    color: #d1d1d1;
 
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
 
-        }
+    max-width: 95%;
+    margin: auto;
 
-        .widget {
-            padding: 5px 5px ;
-            color: #ffffff;
-            display: flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction: column;
-            max-width: 95%;
-            margin: auto;
-            border: 3px solid #9598a1;
-            border-radius: 5px;
-            box-shadow: 2px 2px 1px 0px #9598a1;
+    background: #202020;   /* Notion card */
+    border: 1px solid #2f2f2f; /* мягкая рамка */
+    border-radius: 8px;
 
-        }
+    box-shadow: none;
+}
 
-           
-        .greet{
-            font-size: 3em;
-        }
+/* TEXT STYLE (Notion-like) */
+.greet{
+    font-size: 2.2em;
+    font-weight: 400;
+    color: #e6e6e6;
+}
 
-        .date {
-      
-            font-family: monospace;
-            font-size: 2em;
-        }
+.date {
+    font-family: monospace;
+    font-size: 1.2em;
+    color: #a8a8a8;
+}
 
-        .clock {
-            font-family: monospace;
-            font-size: 2em;
-        }
+.clock {
+    font-family: monospace;
+    font-size: 1.2em;
+    color: #bdbdbd;
+}
 
-        .time {
-            display: inline-block;
-            min-width: 20px;
-        }
+.time {
+    display: inline-block;
+    min-width: 20px;
+}
 
-        .colon {
-            font-size: 1em;
-            display: inline-block;
-        }
+.colon {
+    opacity: 0.5;
+}
 
-     
-
-
-
-
-    </style>
+</style>
 </head>
+
 <body>
 
-
-
-
-<div class="container>">
+<div class="container">
     <div class="widget">
 
-            <div class="greet" id="greet"></div>
+        <div class="greet" id="greet"></div>
 
-                <div class="date" id="date"></div>
-                <div class="clock">
-                    <div class="time" id="hour"></div>
-                    <div class="colon">:</div>
-                    <div class="time" id="min"></div>
-                    <div class="colon">:</div>
-                    <div class="time" id="sec"></div>
-                </div>
-           
+        <div class="date" id="date"></div>
 
-        
+        <div class="clock">
+            <div class="time" id="hour"></div>
+            <div class="colon">:</div>
+            <div class="time" id="min"></div>
+            <div class="colon">:</div>
+            <div class="time" id="sec"></div>
+        </div>
 
     </div>
 </div>
-        
-
-
 
 <script>
 
 function dispalyGreetings(today){
-        hrs = today.getHours();
-        name="DIMAOGRINCH"
-        if (hrs < 12)
-            greet = 'Good Morning  '+name;
-        else if (hrs >= 12 && hrs <= 17)
-            greet = 'Good Afternoon '+name;
-        else if (hrs >= 17 && hrs <= 24)
-            greet = 'Good Evening  '+name;
-        document.getElementById('greet').innerHTML = greet;
+    let hrs = today.getHours();
+    let name = "DIMAOGRINCH";
 
-    }
+    let greet;
 
-    function dispalyDate(today) {  
-       
-        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        const monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
+    if (hrs < 12)
+        greet = 'Good Morning ' + name;
+    else if (hrs < 18)
+        greet = 'Good Afternoon ' + name;
+    else
+        greet = 'Good Evening ' + name;
 
-        var dayName = days[today.getDay()];
-        var monthName = monthNames[today.getMonth()];
-        var date = today.getDate();
-        var year = today.getFullYear();
-        document.getElementById('date').innerHTML =dayName+", "+monthName+" "+date+" "+year;
+    document.getElementById('greet').innerHTML = greet;
+}
 
-    }
+function dispalyDate(today){
 
+    const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    const months = ["January","February","March","April","May","June",
+        "July","August","September","October","November","December"];
 
-    function dispalyClock(today) {
+    document.getElementById('date').innerHTML =
+        days[today.getDay()] + ", " +
+        months[today.getMonth()] + " " +
+        today.getDate() + " " +
+        today.getFullYear();
+}
 
-        var hour = padZeros(twelveHour(today.getHours()));
-        var minutes = padZeros(today.getMinutes());
-        var seconds = padZeros(today.getSeconds());
-       
-        if(today.getHours() >=12){
-            seconds+=" pm"
-        }
-        else{
-            seconds+=" am"
-        }
-       
-        document.getElementById('hour').innerHTML = hour;
-        document.getElementById('min').innerHTML = minutes;
-        document.getElementById('sec').innerHTML = seconds;
-    }
+function dispalyClock(today){
 
-    function twelveHour(hour) {
-        if (hour > 12) {
-            return hour -= 12
-        } else if (hour === 0) {
-            return hour = 12;
-        } else {
-            return hour
-        }
-    }
-    function padZeros(num) {
-        if (num < 10) {
-            num = '0' + num
-        };
-        return num;
-    }
+    function pad(n){ return n < 10 ? "0"+n : n; }
 
-    function dispalyWidget() {
-        var today = new Date();
-        dispalyGreetings(today);
-        dispalyDate(today);
-        dispalyClock(today);
-        setTimeout(dispalyWidget, 500);
-    }
+    document.getElementById('hour').innerHTML = pad(today.getHours());
+    document.getElementById('min').innerHTML = pad(today.getMinutes());
+    document.getElementById('sec').innerHTML = pad(today.getSeconds());
+}
 
-    dispalyWidget()
+function dispalyWidget(){
+    let today = new Date();
+
+    dispalyGreetings(today);
+    dispalyDate(today);
+    dispalyClock(today);
+
+    setTimeout(dispalyWidget, 500);
+}
+
+dispalyWidget();
 
 </script>
 
