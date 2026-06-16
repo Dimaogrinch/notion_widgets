@@ -1,191 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trading Workplace Pro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings</title>
 
-<style>
-body {
-    margin: 0;
-    background: #0a0a0a;
-    font-family: Arial, sans-serif;
-    color: #cfcfcf;
-}
+    <style>
 
-/* GLOBAL WRAPPER */
-.container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
 
-/* MAIN GRID */
-.widget {
-    width: 100%;
-    max-width: 1100px;
+        body{
+            font-variant-caps: all-petite-caps;
 
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-}
 
-/* HEADER CARD */
-.header {
-    background: #111;
-    border: 1px solid #2a2a2a;
-    border-radius: 6px;
+        }
 
-    padding: 10px 12px;
-    text-align: center;
-}
+        .widget {
+            padding: 5px 5px ;
+            color: #ffffff;
+            display: flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction: column;
+            max-width: 95%;
+            margin: auto;
+            border: 3px solid #9598a1;
+            border-radius: 5px;
+            box-shadow: 2px 2px 1px 0px #9598a1;
 
-/* title */
-.greet {
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 1px;
-    color: #cfcfcf;
-}
+        }
 
-/* date */
-.date {
-    font-size: 11px;
-    color: #8c8c8c;
-    margin-top: 2px;
-}
+           
+        .greet{
+            font-size: 3em;
+        }
 
-/* clock */
-.clock {
-    font-family: monospace;
-    font-size: 14px;
-    margin-top: 4px;
-    color: #bdbdbd;
-}
+        .date {
+      
+            font-family: monospace;
+            font-size: 2em;
+        }
 
-/* ROW CARDS */
-.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
+        .clock {
+            font-family: monospace;
+            font-size: 2em;
+        }
 
-/* CARD */
-.card {
-    background: #111;
-    border: 1px solid #2a2a2a;
-    border-radius: 6px;
+        .time {
+            display: inline-block;
+            min-width: 20px;
+        }
 
-    padding: 10px 12px;
+        .colon {
+            font-size: 1em;
+            display: inline-block;
+        }
 
-    min-height: 220px;
-}
+     
 
-/* LIST STYLE */
-.card h3 {
-    font-size: 12px;
-    font-weight: 400;
-    color: #9a9a9a;
-    margin: 0 0 8px 0;
-}
 
-.item {
-    font-size: 12px;
-    color: #cfcfcf;
-    padding: 3px 0;
-}
 
-/* REMOVE EMPTY SPACE FEEL */
-* {
-    box-sizing: border-box;
-}
-</style>
+
+    </style>
 </head>
-
 <body>
 
-<div class="container">
 
-<div class="widget">
 
-    <!-- HEADER -->
-    <div class="header">
-        <div class="greet" id="greet"></div>
-        <div class="date" id="date"></div>
-        <div class="clock">
-            <span id="hour"></span> :
-            <span id="min"></span> :
-            <span id="sec"></span>
-        </div>
-    </div>
 
-    <!-- ROW -->
-    <div class="row">
+<div class="container>">
+    <div class="widget">
 
-        <div class="card">
-            <h3>Main Pages</h3>
-            <div class="item">Dashboard</div>
-            <div class="item">Trading strategy</div>
-            <div class="item">Trade Journal</div>
-            <div class="item">Backtests</div>
-            <div class="item">Daily Analysis</div>
-            <div class="item">Recap</div>
-            <div class="item">Routine</div>
-            <div class="item">Tools</div>
-            <div class="item">News</div>
-        </div>
+            <div class="greet" id="greet"></div>
 
-        <div class="card">
-            <h3>Other Pages</h3>
-            <div class="item">Accounts</div>
-            <div class="item">Pairs</div>
-            <div class="item">Directions</div>
-            <div class="item">Sessions</div>
-            <div class="item">Setup</div>
-            <div class="item">Tasks</div>
-            <div class="item">Book List</div>
-            <div class="item">Resources</div>
-            <div class="item">Database</div>
-        </div>
+                <div class="date" id="date"></div>
+                <div class="clock">
+                    <div class="time" id="hour"></div>
+                    <div class="colon">:</div>
+                    <div class="time" id="min"></div>
+                    <div class="colon">:</div>
+                    <div class="time" id="sec"></div>
+                </div>
+           
+
+        
 
     </div>
-
 </div>
+        
 
-</div>
+
 
 <script>
-function update(){
-    let now = new Date();
-    let name = "DIMAOGRINCH";
 
-    let h = now.getHours();
+function dispalyGreetings(today){
+        hrs = today.getHours();
+        name="DIMAOGRINCH"
+        if (hrs < 12)
+            greet = 'Good Morning  '+name;
+        else if (hrs >= 12 && hrs <= 17)
+            greet = 'Good Afternoon '+name;
+        else if (hrs >= 17 && hrs <= 24)
+            greet = 'Good Evening  '+name;
+        document.getElementById('greet').innerHTML = greet;
 
-    if(h < 12)
-        document.getElementById("greet").innerHTML = "GOOD MORNING " + name;
-    else if(h < 18)
-        document.getElementById("greet").innerHTML = "GOOD AFTERNOON " + name;
-    else
-        document.getElementById("greet").innerHTML = "GOOD EVENING " + name;
+    }
 
-    const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    function dispalyDate(today) {  
+       
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
-    document.getElementById("date").innerHTML =
-        days[now.getDay()] + " " +
-        months[now.getMonth()] + " " +
-        now.getDate() + " " +
-        now.getFullYear();
+        var dayName = days[today.getDay()];
+        var monthName = monthNames[today.getMonth()];
+        var date = today.getDate();
+        var year = today.getFullYear();
+        document.getElementById('date').innerHTML =dayName+", "+monthName+" "+date+" "+year;
 
-    const pad = n => n < 10 ? "0"+n : n;
+    }
 
-    document.getElementById("hour").innerHTML = pad(now.getHours());
-    document.getElementById("min").innerHTML = pad(now.getMinutes());
-    document.getElementById("sec").innerHTML = pad(now.getSeconds());
-}
 
-setInterval(update, 500);
-update();
+    function dispalyClock(today) {
+
+        var hour = padZeros(twelveHour(today.getHours()));
+        var minutes = padZeros(today.getMinutes());
+        var seconds = padZeros(today.getSeconds());
+       
+        if(today.getHours() >=12){
+            seconds+=" pm"
+        }
+        else{
+            seconds+=" am"
+        }
+       
+        document.getElementById('hour').innerHTML = hour;
+        document.getElementById('min').innerHTML = minutes;
+        document.getElementById('sec').innerHTML = seconds;
+    }
+
+    function twelveHour(hour) {
+        if (hour > 12) {
+            return hour -= 12
+        } else if (hour === 0) {
+            return hour = 12;
+        } else {
+            return hour
+        }
+    }
+    function padZeros(num) {
+        if (num < 10) {
+            num = '0' + num
+        };
+        return num;
+    }
+
+    function dispalyWidget() {
+        var today = new Date();
+        dispalyGreetings(today);
+        dispalyDate(today);
+        dispalyClock(today);
+        setTimeout(dispalyWidget, 500);
+    }
+
+    dispalyWidget()
+
 </script>
 
 </body>
